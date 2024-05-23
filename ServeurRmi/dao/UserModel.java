@@ -78,7 +78,8 @@ public class UserModel {
     }
 
     public void sauvegarderMessage(int idAuteur, String destinataire, String message){
-        String sql = "INSERT INTO message (contenu, idUser, destinataire) VALUES ('" + message + "', '" + idAuteur + "', '" + destinataire +"')";
+        String sql = "INSERT INTO message (contenu, idUser, destinataire) " + 
+                    "VALUES ('" + message + "', '" + idAuteur + "', '" + destinataire +"')";
         
         try{
             java.sql.Statement requete = this.bdd.createStatement();
@@ -96,7 +97,9 @@ public class UserModel {
     public Map<String, String> getAllMessage(String destinataire){
         Map<String, String> messages = new Hashtable<>();
 
-        String sql = "SELECT u.nom AS nom, m.contenu AS contenu, m.id AS idMessage FROM message AS m INNER JOIN utilisateur AS u ON m.idUser = u.id WHERE m.destinataire = '" + destinataire + "' AND m.vu = 0";
+        String sql = "SELECT u.nom AS nom, m.contenu AS contenu, m.id AS idMessage FROM message AS m " + 
+                    "INNER JOIN utilisateur AS u ON m.idUser = u.id " + 
+                    "WHERE m.destinataire = '" + destinataire + "' AND m.vu = 0";
 
         try{
             java.sql.Statement requete = this.bdd.createStatement();
@@ -136,7 +139,9 @@ public class UserModel {
         System.out.println(id);
         Map<String, String> messages = new Hashtable<>();
 
-        String sql = "SELECT u.nom AS nom, m.contenu AS contenu, m.id AS idMessage FROM message AS m INNER JOIN utilisateur AS u ON m.idUser = u.id WHERE m.destinataire = '" + destinataire + "' OR m.idUser = '" + id + "'";
+        String sql = "SELECT u.nom AS nom, m.contenu AS contenu, m.id AS idMessage FROM message AS m " + 
+                    "INNER JOIN utilisateur AS u ON m.idUser = u.id " + 
+                    " WHERE m.destinataire = '" + destinataire + "' OR m.idUser = '" + id + "'";
 
         try{
             java.sql.Statement requete = this.bdd.createStatement();
